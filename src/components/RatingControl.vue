@@ -1,12 +1,12 @@
 <template>
   <ul>
-    <li :class="{ active: activeOption === 'poor' }">
+    <li :class="{ active: modelValue === 'poor' }">
       <button type="button" @click="activate('poor')">Poor</button>
     </li>
-    <li :class="{ active: activeOption === 'average' }">
+    <li :class="{ active: modelValue === 'average' }">
       <button type="button" @click="activate('average')">Average</button>
     </li>
-    <li :class="{ active: activeOption === 'great' }">
+    <li :class="{ active: modelValue === 'great' }">
       <button type="button" @click="activate('great')">Great</button>
     </li>
   </ul>
@@ -14,14 +14,11 @@
 
 <script>
 export default {
-  data() {
-    return {
-      activeOption: null,
-    };
-  },
+  props: ["modelValue"], // v-model="rating"    | v-model establece esta prop por defecto en componentes creados por nosotros, pero hay que crearla la prop.
+  emits: ["update:modelValue"],
   methods: {
     activate(option) {
-      this.activeOption = option;
+      this.$emit("update:modelValue", option);
     },
   },
 };
